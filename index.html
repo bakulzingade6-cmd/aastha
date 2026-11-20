@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>A Belated Birthday Wish for Aastha ✨❤️</title>
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
+
+  <!-- Google Fonts: Playfair Display for romantic headers & Poppins / Plus Jakarta Sans for sleek modern body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Sacramento&display=swap"
+    rel="stylesheet">
+
+  <!-- Canvas Confetti Library CDN (with local particle fallback inside script.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Background Ambient Glows & Particle Canvas -->
+  <div class="bg-glow-orb bg-glow-1"></div>
+  <div class="bg-glow-orb bg-glow-2"></div>
+  <div class="bg-glow-orb bg-glow-3"></div>
+  <canvas id="ambientCanvas" class="ambient-canvas"></canvas>
+
+  <!-- Audio & Sound Toggle Floating Bar -->
+  <header class="top-nav">
+    <div class="brand-pill">
+      <span class="pulse-dot"></span>
+      <span class="brand-text">For Aastha</span>
+    </div>
+    <div class="nav-actions">
+      <button id="soundToggleBtn" class="sound-toggle-btn" aria-label="Toggle Sound Effects" title="Toggle Sound">
+        <span class="sound-icon" id="soundIcon">🔔</span>
+        <span class="sound-label">Sound FX</span>
+      </button>
+      <button id="musicToggleBtn" class="music-toggle-btn song-btn" aria-label="Play Priyatama 2.0"
+        title="Priyatama 2.0 (Video Song) | Kabir Singh | Sahid Kapoor, Kiara Adwani | Radhan | AA Films">
+        <span class="music-bars" id="musicBars">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="music-icon" id="musicIcon">🎵</span>
+        <span class="music-label" id="musicLabel">Priyatama 2.0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main App Container -->
+  <main class="app-container">
+
+    <!-- ========================================================
+         STAGE 1: THE TEASER / ENVELOPE OPENING
+         ======================================================== -->
+    <section id="stage1" class="stage stage-active">
+      <div class="stage-content teaser-card glass-panel">
+
+        <!-- Animated Glowing Heart Badge -->
+        <div class="teaser-badge">
+          <span class="badge-sparkle">✨</span>
+          <span>A Special Delivery</span>
+          <span class="badge-sparkle">✨</span>
+        </div>
+
+        <!-- 3D Interactive Glowing Envelope -->
+        <div class="envelope-wrapper" id="envelopeWrapper">
+          <div class="envelope" id="envelope">
+            <div class="envelope-flap" id="envelopeFlap"></div>
+            <div class="envelope-pocket"></div>
+            <div class="envelope-letter" id="envelopeLetter">
+              <span class="letter-stamp">💌</span>
+              <p class="letter-preview">To: Aastha ❤️</p>
+            </div>
+            <!-- Wax Seal Button -->
+            <button class="wax-seal" id="waxSealBtn" aria-label="Open Envelope">
+              <span class="seal-inner">
+                <svg viewBox="0 0 24 24" class="seal-heart" fill="currentColor">
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <h1 class="teaser-heading">
+          Hey <span class="highlight-name">Aastha</span>...
+        </h1>
+
+        <p class="teaser-subtext">
+          I know I’m a little late, but I made something special just for you.
+        </p>
+
+        <button id="openTeaserBtn" class="primary-btn glow-btn">
+          <span>Open It</span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        <p class="tap-hint">Tap the envelope or button to open 💌</p>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         STAGE 2: THE CUTE APOLOGY (VIRAL DODGING "NO" BUTTON)
+         ======================================================== -->
+    <section id="stage2" class="stage stage-hidden">
+      <div class="stage-content apology-card glass-panel" id="apologyCard">
+
+        <div class="apology-header">
+          <div class="emoji-avatar">
+            <div class="emoji-glow"></div>
+            <span class="big-emoji" id="apologyEmoji">🥺</span>
+          </div>
+          <span class="apology-tag">Belated Confession</span>
+        </div>
+
+        <h2 class="apology-title">
+          I am so sorry, <span class="highlight-name">Aastha</span>...
+        </h2>
+
+        <div class="apology-quote-box">
+          <p class="apology-quote">
+            "I messed up the timing, <strong>not</strong> how much you matter."
+          </p>
+          <p class="apology-explanation">
+            Life got a little chaotic, but you deserve all the love, happiness, and celebrations in the universe. Please
+            don't be mad at me! 🌹
+          </p>
+        </div>
+
+        <!-- The Big Question -->
+        <div class="question-container">
+          <h3 class="question-prompt" id="questionPrompt">Will you forgive me?</h3>
+          <p class="question-subprompt" id="questionSubprompt">Choose very carefully... 👀</p>
+        </div>
+
+        <!-- Interactive Button Playground -->
+        <div class="action-buttons-area" id="buttonsArea">
+          <!-- YES BUTTON (Grows bigger on dodge) -->
+          <button id="yesBtn" class="primary-btn yes-btn glow-btn">
+            <span class="yes-btn-content">
+              <span>Yes, I forgive you</span>
+              <span class="btn-heart">❤️</span>
+            </span>
+          </button>
+
+          <!-- NO BUTTON (Dodges playfully) -->
+          <button id="noBtn" class="no-btn" type="button">
+            <span id="noBtnText">No 😤</span>
+          </button>
+        </div>
+
+        <!-- Floating playful remark banner -->
+        <div class="dodge-remark" id="dodgeRemark">
+          <span>Hehe, nice try! Try clicking Yes instead 😉</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         STAGE 3: THE BIRTHDAY CELEBRATION REVEAL
+         ======================================================== -->
+    <section id="stage3" class="stage stage-hidden">
+      <div class="celebration-container">
+
+        <!-- Hero Header -->
+        <div class="celebration-hero glass-panel">
+          <div class="confetti-badge">
+            <span class="sparkle-icon">✨</span>
+            <span>Better Late Than Never</span>
+            <span class="sparkle-icon">✨</span>
+          </div>
+
+          <h1 class="celebration-title">
+            Happy Belated Birthday,<br>
+            <span class="name-shimmer">Aastha!</span> 🎂❤️
+          </h1>
+
+          <p class="celebration-subtitle">
+            May this new year of your life be filled with endless magic, radiant smiles, and dreams turning into
+            reality.
+          </p>
+        </div>
+
+        <!-- Interactive Birthday Cake Section -->
+        <section class="cake-showcase glass-panel">
+          <div class="section-tag">Interactive Wish</div>
+          <h3 class="cake-section-title">Blow Out The Candles 🕯️</h3>
+          <p class="cake-instruction" id="cakeInstruction">
+            Make a secret wish in your heart, then tap the candles to blow them out!
+          </p>
+
+          <!-- CSS Birthday Cake -->
+          <div class="cake-stage">
+            <div class="cake-wrapper" id="cakeWrapper">
+
+              <!-- Candles Container -->
+              <div class="candles-row">
+                <!-- Candle 1 -->
+                <div class="candle candle-1" data-candle="1" title="Tap to blow out!">
+                  <div class="flame" id="flame1">
+                    <div class="flame-glow"></div>
+                  </div>
+                  <div class="smoke" id="smoke1"></div>
+                  <div class="wick"></div>
+                  <div class="candle-stick"></div>
+                </div>
+
+                <!-- Candle 2 (Center) -->
+                <div class="candle candle-2" data-candle="2" title="Tap to blow out!">
+                  <div class="flame" id="flame2">
+                    <div class="flame-glow"></div>
+                  </div>
+                  <div class="smoke" id="smoke2"></div>
+                  <div class="wick"></div>
+                  <div class="candle-stick"></div>
+                </div>
+
+                <!-- Candle 3 -->
+                <div class="candle candle-3" data-candle="3" title="Tap to blow out!">
+                  <div class="flame" id="flame3">
+                    <div class="flame-glow"></div>
+                  </div>
+                  <div class="smoke" id="smoke3"></div>
+                  <div class="wick"></div>
+                  <div class="candle-stick"></div>
+                </div>
+              </div>
+
+              <!-- Cake Tiers -->
+              <div class="cake-tier cake-tier-top">
+                <div class="cake-cream-drips">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="cake-berries">
+                  <span class="berry b1">🍓</span>
+                  <span class="berry b2">✨</span>
+                  <span class="berry b3">🍓</span>
+                </div>
+              </div>
+              <div class="cake-tier cake-tier-middle">
+                <div class="frosting-layer"></div>
+              </div>
+              <div class="cake-tier cake-tier-bottom">
+                <div class="cake-decorations">
+                  <span class="gold-piping"></span>
+                </div>
+              </div>
+
+              <!-- Cake Stand / Plate -->
+              <div class="cake-plate"></div>
+            </div>
+          </div>
+
+          <!-- Blow Out Action Controls -->
+          <div class="cake-controls">
+            <button id="blowCandlesBtn" class="primary-btn glow-btn">
+              <span>Blow Out All Candles 🎂💨</span>
+            </button>
+            <button id="relightBtn" class="secondary-btn" style="display: none;">
+              <span>Relight Candles 🕯️</span>
+            </button>
+          </div>
+
+          <!-- Secret Wish Revealed Banner -->
+          <div class="wish-revealed-banner" id="wishBanner">
+            <div class="wish-sparkles">🎉 ✨ 💫 💖</div>
+            <h4>May all your wishes come true, Aastha!</h4>
+            <p>You bring so much light and joy to everyone around you. Keep shining bright!</p>
+          </div>
+        </section>
+
+
+        <!-- Heartfelt Note Card (Easy to edit & customize) -->
+        <section class="letter-card glass-panel">
+          <div class="letter-card-header">
+            <div class="quill-icon">💌</div>
+            <span class="letter-tag">A Note From The Heart</span>
+          </div>
+
+          <!-- ========================================================
+               CUSTOMIZE NOTE FOR AASTHA:
+               You can modify the heartfelt message below anytime!
+               ======================================================== -->
+          <div class="letter-body">
+            <p class="letter-greeting">Dearest Aastha,</p>
+
+            <p>
+              I know time is missed i should have wished you at 12, but the special people who make the world brighter
+              never are. Even though this wish arrives a little late, every single prayer and wish for your happiness is
+              fresh, genuine, and straight from the heart.
+            </p>
+
+            <p>
+              You possess an incredible energy, a warm soul, and a smile that can illuminate the darkest room. I hope
+              your birthday was as wonderful, funny, and beautiful as you are.
+            </p>
+
+            <p>
+              May this upcoming year shower you with unforgettable memories, peace of mind, big career triumphs,
+              countless cups of good coffee, and endless reasons to smile.
+            </p>
+
+            <div class="letter-signoff">
+              <span class="signoff-with-love">With all my fondest wishes & sincere apologies,</span>
+              <span class="signoff-name">— Yours Truly ✨</span>
+            </div>
+          </div>
+          <!-- ================= END CUSTOMIZABLE NOTE ================= -->
+
+          <!-- Optional Photo Frame Card (Customizable) -->
+          <!-- CUSTOMIZE: To show an actual picture of Aastha or you both, replace the image url below or unhide it! -->
+          <div class="photo-card-wrapper">
+            <div class="polaroid-frame">
+              <div class="polaroid-image-slot">
+                <!-- Cute stylish SVG avatar placeholder (or replace src with a photo file) -->
+                <div class="polaroid-avatar">
+                  <span class="avatar-icon">👑</span>
+                  <span class="avatar-tag">Birthday Queen Aastha</span>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <span>Shining today, tomorrow & always ✨</span>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+
+        <!-- Interactive 3D Flip Cards (3 Cards) -->
+        <section class="flip-cards-section">
+          <div class="section-intro">
+            <span class="section-tag">Little Reminders</span>
+            <h3 class="cards-title">3 Special Notes For You</h3>
+            <p class="cards-subtitle">Tap each card to flip and reveal a secret wish 💌</p>
+          </div>
+
+          <div class="cards-grid">
+
+            <!-- Card 1 -->
+            <div class="flip-card" data-card="1">
+              <div class="flip-card-inner">
+                <!-- Front -->
+                <div class="flip-card-front glass-panel">
+                  <div class="card-icon-wrapper">
+                    <span class="card-front-icon">✨</span>
+                  </div>
+                  <h4 class="card-front-title">Always Shining</h4>
+                  <p class="card-front-desc">Your radiant vibe</p>
+                  <span class="card-tap-pill">Tap to flip ↺</span>
+                </div>
+                <!-- Back -->
+                <div class="flip-card-back glass-panel">
+                  <div class="card-back-badge">Reminder #1</div>
+                  <h4 class="card-back-title">You're One of a Kind!</h4>
+                  <p class="card-back-text">
+                    Never forget how uniquely talented, resilient, and charming you are. Keep being unapologetically
+                    you! 💫
+                  </p>
+                  <span class="card-emoji-footer">🌟 💖 ✨</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="flip-card" data-card="2">
+              <div class="flip-card-inner">
+                <!-- Front -->
+                <div class="flip-card-front glass-panel">
+                  <div class="card-icon-wrapper">
+                    <span class="card-front-icon">🎁</span>
+                  </div>
+                  <h4 class="card-front-title">Best Year Ahead</h4>
+                  <p class="card-front-desc">Golden blessings</p>
+                  <span class="card-tap-pill">Tap to flip ↺</span>
+                </div>
+                <!-- Back -->
+                <div class="flip-card-back glass-panel">
+                  <div class="card-back-badge">Reminder #2</div>
+                  <h4 class="card-back-title">Leveling Up!</h4>
+                  <p class="card-back-text">
+                    May this year open doors you never imagined, bring adventures you cherish, and surround you with
+                    pure joy. 🥂
+                  </p>
+                  <span class="card-emoji-footer">🎉 🚀 🎂</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="flip-card" data-card="3">
+              <div class="flip-card-inner">
+                <!-- Front -->
+                <div class="flip-card-front glass-panel">
+                  <div class="card-icon-wrapper">
+                    <span class="card-front-icon">🌹</span>
+                  </div>
+                  <h4 class="card-front-title">The Late Fee</h4>
+                  <p class="card-front-desc">My apology pledge</p>
+                  <span class="card-tap-pill">Tap to flip ↺</span>
+                </div>
+                <!-- Back -->
+                <div class="flip-card-back glass-panel">
+                  <div class="card-back-badge">Reminder #3</div>
+                  <h4 class="card-back-title">Treat Is On Me!</h4>
+                  <p class="card-back-text">
+                    I officially owe you your favorite treat, coffee, or dessert to make up for my terrible memory!
+                    Redeem anytime! ☕🍰
+                  </p>
+                  <span class="card-emoji-footer">🍧 ☕ 🍫</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- Celebratory Action Footer -->
+        <footer class="celebration-footer glass-panel">
+          <div class="footer-heart">❤️</div>
+          <h3 class="footer-title">Happy Belated Birthday, Aastha!</h3>
+          <p class="footer-text">
+            I hope this brought a genuine smile to your face.
+          </p>
+
+          <div class="footer-actions">
+            <!-- Replay Button -->
+            <button id="replayBtn" class="replay-btn">
+              <span class="replay-icon">↺</span>
+              <span>Replay Experience</span>
+            </button>
+
+            <!-- Confetti Blast Button -->
+            <button id="extraConfettiBtn" class="extra-confetti-btn">
+              <span>More Confetti! 🎊</span>
+            </button>
+          </div>
+
+          <div class="made-with-love">
+            Crafted with sincere apologies & lots of warmth for Aastha ✨
+          </div>
+        </footer>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Music Player Mini-Card (Shows when song is playing) -->
+  <div class="music-dock glass-panel" id="musicDock">
+    <div class="dock-art">
+      <span class="vinyl-record" id="vinylRecord">💿</span>
+    </div>
+    <div class="dock-info">
+      <span class="dock-title">Priyatama 2.0</span>
+      <span class="dock-subtitle">Kabir Singh • Radhan</span>
+    </div>
+    <div class="dock-controls">
+      <button id="dockPlayPauseBtn" class="dock-btn" title="Pause / Play" aria-label="Pause or Play">⏸️</button>
+      <button id="dockCloseBtn" class="dock-btn dock-close" title="Close Player" aria-label="Close">✕</button>
+    </div>
+  </div>
+
+  <!-- Concealed YouTube Player & Local Audio Fallback Container -->
+  <div id="ytPlayerContainer" class="hidden-player"></div>
+  <audio id="localAudioFallback" preload="none">
+    <source src="priyatama.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <!-- Main JavaScript Logic -->
+  <script src="script.js"></script>
+</body>
+
+</html>
